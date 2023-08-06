@@ -15,8 +15,9 @@
 <br>
 
 #### 🌟 Skills
-![skills](https://github.com/nadine-ramirez/Portfolio/assets/117482520/bae97bbd-c537-48b0-badf-e7f738172c27)
+![skills](https://github.com/nadine-ramirez/nadine-ramirez/assets/117482520/48e59d6b-9d56-4854-8461-a0f4e37f21ef)
 
 <br>
 
 #### 👩‍💻 Eager to collaborate and contribute value as part of an innovative team.
+
