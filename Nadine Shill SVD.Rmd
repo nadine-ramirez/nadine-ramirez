@@ -1,0 +1,127 @@
+---
+title: "Discussion 4"
+author: "Nadine Ramirez"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    df_print: paged
+---
+
+**Question 2: Singular Value Decomposition (SVD)**
+
+```{r echo=FALSE}
+library(readr)
+SP <- read_csv("StudentsPerformance.csv")
+View(SP)
+head(SP, 10)
+
+```
+I chose the dataset on student performances which detail the relationship between students' backgrounds and performances (on test scores). 
+
+```{r, echo = FALSE}
+#The following code will be converting categories into num values 
+SP$lunch_num <- as.numeric(factor(SP$lunch, levels = c("free/reduced", "standard")))
+SP$gender_num <- as.numeric(factor(SP$gender, levels = c("female", "male"))) 
+SP$race.ethnicity_num <- as.numeric(factor(SP$race.ethnicity, levels = c("group A", "group B", "group C", "group D", "group E"))) 
+SP$parental.level.of.education_num <- as.numeric(factor(SP$parental.level.of.education, levels = c("some college", "high school", "associate's degree", "master's degree", "bachelor's degree", "some high school")))
+SP$test.prep.course_num <- as.numeric(factor(SP$test.prep.course, levels = c("completed", "none")))
+
+```
+
+
+```{r}
+#Only keeping the numerical data
+SP<-subset(SP,select=-c(gender,race.ethnicity,lunch,parental.level.of.education,test.prep.course))
+head(SP,10)
+```
+
+Singular Value Decomposition
+```{r}
+sv = svd(SP)
+sv$d
+```
+
+**Histogram**
+The histogram shows the total score distribution of the sample of students. This lead for the range of 50 - 250 to be created for the reduced
+```{r}
+library(ggplot2)
+hist(SP$total.score)
+```
+
+
+
+
+
+```{r}
+library(ggplot2)
+library(plotly)
+```
+
+
+```{r}
+reducedSP = SP[which( SP$total.score >= 50 & SP$total.score <= 300),]
+dim(reducedSP)
+
+plot_ly(reducedSP, x = ~math.score, y = ~writing.score, z = ~reading.score,size = 1) %>% add_markers(color = ~total.score)
+```
+
+**Single Value Reduced**
+```{r}
+svd(reducedSP)$d
+
+```
+**Centered Reduced**
+```{r}
+centerreducedSP=scale(reducedSP, center=TRUE,scale=FALSE)
+cov(centerreducedSP)
+
+```
+**Maximum:**
+```{r}
+max(abs(centerreducedSP))
+```
+```{r}
+usv= svd(centerreducedSP)
+```
+
+Approximations:
+*First Approximation*
+```{r}
+approximationSP1=usv$d[1] * usv$u[, 1]%*%t(usv$v[, 1])
+max(abs(centerreducedSP- approximationSP1))
+```
+*Second Approximation*
+
+```{r}
+approximationSP2= usv$d[1] * usv$u[, 1]%*%t(usv$v[, 1]) + usv$d[2]*usv$u[, 2]%*%t(usv$v[, 2]) 
+max(abs(centerreducedSP- approximationSP2))
+```
+
+*Third Approximation*
+```{r}
+approximationSP3= usv$d[1] * usv$u[, 1]%*%t(usv$v[, 1]) + usv$d[2]*usv$u[, 2]%*%t(usv$v[, 2]) +usv$d[3] * usv$u[, 3]%*%t(usv$v[, 3])
+max(abs(centerreducedSP- approximationSP3))
+```
+
+**Plot**
+
+```{r}
+plotSP= as.data.frame(cbind(usv$d[1] * usv$u[, 1],usv$d[2] * usv$u[, 2], usv$d[3] * usv$u[, 3]))
+plot_ly(plotSP,x= ~plotSP[,1], y= ~plotSP[,2], z=~plotSP[,3], size = 1) %>% add_markers(color = ~reducedSP$total.score)
+```
+
+This leaves us with a large variance which can be seen by the shape of the graph (no true shape)
+
+**Centered and Scaled**
+```{r}
+centerscaleSP=scale(reducedSP, center=TRUE,scale=TRUE)
+cov(centerscaleSP)
+```
+
+**Final Centered Plot**
+```{r}
+usv= svd(centerscaleSP)
+p2SP= as.data.frame(cbind(usv$d[1] * usv$u[, 1],usv$d[2] * usv$u[, 2], usv$d[3] * usv$u[, 3]))
+plot_ly(p2SP,x= ~p2SP[,1], y= ~p2SP[,2], z=~p2SP[,3], size = 1) %>% add_markers(color = ~reducedSP$total.score)
+```
+
