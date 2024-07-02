@@ -1,6 +1,6 @@
 # <p align = "center"> Nadine Shill 🪐
 
-### <p align = "center"> Junior Computational Data Scientist
+### <p align = "center"> Computational Data Scientist/Manager
 
 
 #### <p align = "center"> Driven computational data scientist with a passion for leveraging statistical modeling and machine learning to extract impactful insights. Currently pursuing a Master's in Mathematics at Johns Hopkins, with coursework focused on computational methods, algorithms, and programming for quantitative analysis.
