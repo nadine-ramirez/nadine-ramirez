@@ -1,9 +1,9 @@
 # <p align = "center"> Nadine Shill 🪐
 
-### <p align = "center"> Computational Data Scientist/Manager
+### <p align = "center"> Machine Learning Engineer/ Data Scientist
 
 
-#### <p align = "center"> Driven computational data scientist with a passion for leveraging statistical modeling and machine learning to extract impactful insights. Currently pursuing a Master's in Mathematics at Johns Hopkins, with coursework focused on computational methods, algorithms, and programming for quantitative analysis.
+#### <p align = "center"> Driven ML engineer and data scientist with a passion for leveraging statistical modeling and machine learning to extract impactful insights. Currently pursuing a Master's in Mathematics at Johns Hopkins, with coursework focused on computational methods, algorithms, and programming for quantitative analysis.
 
 <b>🌟 Interests</b>
   <li class ="font-times">Deep Learning Models</li>
